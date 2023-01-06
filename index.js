@@ -15,7 +15,8 @@ import handleValidationErrors from './utils/handleValidationErrors.js';
 
 mongoose.set("strictQuery", false);
 mongoose
-    .connect('mongodb+srv://admin:12345@cluster0.aq7myby.mongodb.net/blog?retryWrites=true&w=majority')
+    // .connect('mongodb+srv://admin:12345@cluster0.aq7myby.mongodb.net/blog?retryWrites=true&w=majority')
+    .connect(process.env.MONGODB_URI)
     .then(() => console.log("DB OK"))
     .catch((err) => console.log("DB ERROR", err))
 
@@ -55,7 +56,7 @@ app.get('/posts/:id', getOne);
 app.delete('/posts/:id', checkAuth, remove);
 app.patch('/posts/:id', postCreateValidation, checkAuth, handleValidationErrors, update);
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
     if (err) {
         return console.log(err)
     }
