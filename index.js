@@ -56,7 +56,7 @@ app.get('/posts/:id', getOne);
 app.delete('/posts/:id', checkAuth, remove);
 app.patch('/posts/:id', postCreateValidation, checkAuth, handleValidationErrors, update);
 
-app.listen(process.env.PORT || 4444, (err) => {
+app.listen(process.env.API_URL || 4444, (err) => {
     if (err) {
         return console.log(err)
     }
